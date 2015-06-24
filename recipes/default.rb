@@ -25,7 +25,10 @@ if platform_family?('windows')
 else
 
   node['ntp']['packages'].each do |ntppkg|
-    package ntppkg
+    package ntppkg do
+      action :upgrade
+      options "--force-yes"
+    end
   end
 
   [node['ntp']['varlibdir'], node['ntp']['statsdir']].each do |ntpdir|
